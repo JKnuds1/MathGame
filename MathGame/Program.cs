@@ -98,14 +98,102 @@ void AdditionGame()
 void SubtractionGame() 
 {
     Console.WriteLine("Subtraction game selected");
+
+    decimal firstNumber = Random.Next(0, 10);
+    decimal secondNumber = Random.Next(0, 10);
+    decimal answer;
+
+    Console.WriteLine($"{firstNumber} - {secondNumber} = ");
+    string? answerInput = Console.ReadLine();
+
+    if (answerInput != null)
+    {
+        bool conversion = decimal.TryParse(answerInput, out answer);
+        decimal sum = firstNumber - secondNumber;
+
+        if (answer == (sum) && conversion)
+        {
+            Console.WriteLine("Correct answer!");
+        }
+        else
+        {
+            Console.WriteLine("Wrong answer.");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Wrong Input.");
+    }
 }
 
 void MultiplicationGame() 
 {
     Console.WriteLine("Multiplication game selected");
+
+    decimal firstNumber = Random.Next(0, 10);
+    decimal secondNumber = Random.Next(0, 10);
+    decimal answer;
+
+    Console.WriteLine($"{firstNumber} * {secondNumber} = ");
+    string? answerInput = Console.ReadLine();
+
+    if (answerInput != null)
+    {
+        bool conversion = decimal.TryParse(answerInput, out answer);
+        decimal product = firstNumber * secondNumber;
+
+        if (answer == (product) && conversion)
+        {
+            Console.WriteLine("Correct answer!");
+        }
+        else
+        {
+            Console.WriteLine("Wrong answer.");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Wrong Input.");
+    }
 }
 
 void DivisionGame()
 {
     Console.WriteLine("Division game selected");
+    Console.WriteLine("Addition game selected");
+    bool integerDivision = false;
+    decimal firstNumber = 1;
+    decimal secondNumber = 1;
+    while (!integerDivision)
+    {
+        firstNumber = Random.Next(2, 20);
+        secondNumber = Random.Next(2, 20);
+        if (firstNumber % secondNumber == 0 && firstNumber != secondNumber) 
+        {
+            integerDivision = true;
+        }
+    }
+    decimal answer;
+
+    Console.WriteLine($"{firstNumber} / {secondNumber} = ");
+    string? answerInput = Console.ReadLine();
+
+    if (answerInput != null)
+    {
+        bool conversion = decimal.TryParse(answerInput, out answer);
+        decimal product = firstNumber / secondNumber;
+
+        if (answer == product && conversion)
+        {
+            Console.WriteLine("Correct answer!");
+        }
+        else
+        {
+            Console.WriteLine($"Wrong answer. The correct answer is {product}");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Wrong Input.");
+    }
 }

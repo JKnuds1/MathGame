@@ -1,10 +1,14 @@
 ﻿
 using System.Text;
+using System.Threading.Tasks.Sources;
 
 Console.WriteLine("Hello! Please enter your name:");
 
+
+
 string? name = Console.ReadLine();
 bool quit = false;
+List<string> games = new();
 
 if (name == null)
 {
@@ -33,6 +37,7 @@ void main(string name)
                         S - Subtraction game
                         M - Multiplication game
                         D - Division game
+                        V - View previous games
                         Q - quit");
     string? userInput = Console.ReadLine(); 
 
@@ -53,9 +58,14 @@ void main(string name)
         case "d":
             DivisionGame();
             break;
+        case "v":
+            GetGames();
+            break;
+
+
+
         case "q":
             Console.WriteLine("Quitting..");
-            Environment.Exit(1);
             quit = true;
             break;
     }
@@ -63,12 +73,14 @@ void main(string name)
 
 void AdditionGame() 
 {
-    Console.WriteLine("Addition game selected");
+    Console.Clear();
+    Console.WriteLine("Addition game");
     var random = new Random();
 
     int firstNumber;
     int secondNumber;
     int answer;
+    int score = 0;
 
 
     for (int i = 0; i < 5; i++)
@@ -85,30 +97,36 @@ void AdditionGame()
 
             if (answer == (sum) && conversion)
             {
-                Console.WriteLine("Correct answer!");
+                score++;
+                Console.WriteLine(@"Correct answer! Press a key to continue...");
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine($"Wrong answer. The answer is {sum}");
+                Console.WriteLine($"Wrong answer. The answer is {sum}. Press a key to continue...");
+                Console.ReadLine();
             }
         }
         else
         {
-            Console.WriteLine("Wrong Input.");
+            Console.WriteLine("Wrong Input. Press a key to continue...");
+            Console.ReadLine();
         }
     }
-
+    AddHistory(games, score, "Addition");
 
 }
 
 void SubtractionGame() 
 {
-    Console.WriteLine("Subtraction game selected");
+    Console.Clear();
+    Console.WriteLine("Subtraction game");
 
     var random = new Random();
     int firstNumber;
     int secondNumber;
     int answer;
+    int score = 0;
 
     for (int i = 0; i < 5; i++)
     {
@@ -124,29 +142,36 @@ void SubtractionGame()
 
             if (answer == (sum) && conversion)
             {
-                Console.WriteLine("Correct answer!");
+                score++;
+                Console.WriteLine("Correct answer! Press any key to continue...");
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine($"Wrong answer. The answer is {sum}");
+                Console.WriteLine($"Wrong answer. The answer is {sum}. Press any key to continue...");
+                Console.ReadLine();
             }
         }
         else
         {
-            Console.WriteLine("Wrong Input.");
+            Console.WriteLine("Wrong Input. Press any key to continue");
+            Console.ReadLine();
         }
     }
+    AddHistory(games, score, "Subtraction");
 }
 
 void MultiplicationGame() 
 {
-    Console.WriteLine("Multiplication game selected");
+    Console.Clear();
+    Console.WriteLine("Multiplication game");
 
     var random = new Random();
 
     int firstNumber;
     int secondNumber;
     int answer;
+    int score = 0;
 
     for (int i = 0; i < 5; i++)
     {
@@ -162,23 +187,30 @@ void MultiplicationGame()
 
             if (answer == (product) && conversion)
             {
-                Console.WriteLine("Correct answer!");
+                score++;
+                Console.WriteLine("Correct answer! Press any key to continue...");
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine($"Wrong answer. The answer is {product}");
+                Console.WriteLine($"Wrong answer. The answer is {product}. Press any key to continue...");
+                Console.ReadLine();
             }
         }
         else
         {
-            Console.WriteLine("Wrong Input.");
+            Console.WriteLine("Wrong Input. Press any key to continue...");
+            Console.ReadLine();
         }
     }
+    AddHistory(games, score, "Multiplication");
 }
 
 void DivisionGame()
 {
-    Console.WriteLine("Division game selected");
+    Console.Clear();
+    Console.WriteLine("Division game");
+    int score = 0;
 
 
     for (int i = 0; i < 5; i++)
@@ -200,18 +232,23 @@ void DivisionGame()
 
             if (answer == product && conversion)
             {
-                Console.WriteLine("Correct answer!");
+                score++;
+                Console.WriteLine("Correct answer! Press any key to continue...");
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine($"Wrong answer. The correct answer is {product}");
+                Console.WriteLine($"Wrong answer. The correct answer is {product}. Press any key to continue...");
+                Console.ReadLine();
             }
         }
         else
         {
-            Console.WriteLine("Wrong Input.");
+            Console.WriteLine("Wrong Input. Press any key to continue...");
+            Console.ReadLine();
         }
     }
+    AddHistory(games, score, "Division");
 }
 
 
@@ -236,4 +273,23 @@ int[] GetDivisionNumbers()
 
 
 
+}
+
+void GetGames() 
+{
+    Console.Clear();
+    Console.WriteLine("Games History");
+    Console.WriteLine("-------------------------------------");
+    foreach (var game in games) 
+    {
+        Console.WriteLine(game);
+    }
+    Console.WriteLine("-------------------------------------\n");
+    Console.WriteLine("Press any key to return to the Main Menu.");
+    Console.ReadLine();
+}
+
+void AddHistory(List<string> list, int score, string game ) 
+{
+    list.Add($" Date:{DateTime.UtcNow} - {game}: Score {score}");
 }
